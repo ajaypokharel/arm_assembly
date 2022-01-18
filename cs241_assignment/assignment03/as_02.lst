@@ -1,0 +1,244 @@
+AARCH64 GAS  as_02.s 			page 1
+
+
+   1              		.arch armv8-a
+   2              		.file	"as_02.c"
+   3              		.text
+   4              		.align	2
+   5              		.global	built_in
+   6              		.type	built_in, %function
+   7              	built_in:
+   8              	.LFB6:
+   9              		.cfi_startproc
+  10 0000 FD7BBDA9 		stp	x29, x30, [sp, -48]!
+  11              		.cfi_def_cfa_offset 48
+  12              		.cfi_offset 29, -48
+  13              		.cfi_offset 30, -40
+  14 0004 FD030091 		mov	x29, sp
+  15 0008 E00F00F9 		str	x0, [sp, 24]
+  16 000c FF2F00B9 		str	wzr, [sp, 44]
+  17 0010 0C000014 		b	.L2
+  18              	.L3:
+  19 0014 E02F80B9 		ldrsw	x0, [sp, 44]
+  20 0018 E10F40F9 		ldr	x1, [sp, 24]
+  21 001c 2000008B 		add	x0, x1, x0
+  22 0020 00004039 		ldrb	w0, [x0]
+  23 0024 E0AF0039 		strb	w0, [sp, 43]
+  24 0028 E0AF4039 		ldrb	w0, [sp, 43]
+  25 002c 00000094 		bl	toupper
+  26 0030 00000094 		bl	putchar
+  27 0034 E02F40B9 		ldr	w0, [sp, 44]
+  28 0038 00040011 		add	w0, w0, 1
+  29 003c E02F00B9 		str	w0, [sp, 44]
+  30              	.L2:
+  31 0040 E02F80B9 		ldrsw	x0, [sp, 44]
+  32 0044 E10F40F9 		ldr	x1, [sp, 24]
+  33 0048 2000008B 		add	x0, x1, x0
+  34 004c 00004039 		ldrb	w0, [x0]
+  35 0050 1F000071 		cmp	w0, 0
+  36 0054 01FEFF54 		bne	.L3
+  37 0058 1F2003D5 		nop
+  38 005c FD7BC3A8 		ldp	x29, x30, [sp], 48
+  39              		.cfi_restore 30
+  40              		.cfi_restore 29
+  41              		.cfi_def_cfa_offset 0
+  42 0060 C0035FD6 		ret
+  43              		.cfi_endproc
+  44              	.LFE6:
+  45              		.size	built_in, .-built_in
+  46              		.section	.rodata
+  47              		.align	3
+  48              	.LC0:
+  49 0000 55707065 		.string	"Upper Case: %s\n"
+  49      72204361 
+  49      73653A20 
+  49      25730A00 
+  50              		.text
+  51              		.align	2
+  52              		.global	upper
+  53              		.type	upper, %function
+  54              	upper:
+AARCH64 GAS  as_02.s 			page 2
+
+
+  55              	.LFB7:
+  56              		.cfi_startproc
+  57 0064 FD7BBDA9 		stp	x29, x30, [sp, -48]!
+  58              		.cfi_def_cfa_offset 48
+  59              		.cfi_offset 29, -48
+  60              		.cfi_offset 30, -40
+  61 0068 FD030091 		mov	x29, sp
+  62 006c E00F00F9 		str	x0, [sp, 24]
+  63 0070 FF2F00B9 		str	wzr, [sp, 44]
+  64 0074 1A000014 		b	.L5
+  65              	.L7:
+  66 0078 E02F80B9 		ldrsw	x0, [sp, 44]
+  67 007c E10F40F9 		ldr	x1, [sp, 24]
+  68 0080 2000008B 		add	x0, x1, x0
+  69 0084 00004039 		ldrb	w0, [x0]
+  70 0088 1F800171 		cmp	w0, 96
+  71 008c 29020054 		bls	.L6
+  72 0090 E02F80B9 		ldrsw	x0, [sp, 44]
+  73 0094 E10F40F9 		ldr	x1, [sp, 24]
+  74 0098 2000008B 		add	x0, x1, x0
+  75 009c 00004039 		ldrb	w0, [x0]
+  76 00a0 1FE80171 		cmp	w0, 122
+  77 00a4 68010054 		bhi	.L6
+  78 00a8 E02F80B9 		ldrsw	x0, [sp, 44]
+  79 00ac E10F40F9 		ldr	x1, [sp, 24]
+  80 00b0 2000008B 		add	x0, x1, x0
+  81 00b4 01004039 		ldrb	w1, [x0]
+  82 00b8 E02F80B9 		ldrsw	x0, [sp, 44]
+  83 00bc E20F40F9 		ldr	x2, [sp, 24]
+  84 00c0 4000008B 		add	x0, x2, x0
+  85 00c4 21800051 		sub	w1, w1, #32
+  86 00c8 211C0012 		and	w1, w1, 255
+  87 00cc 01000039 		strb	w1, [x0]
+  88              	.L6:
+  89 00d0 E02F40B9 		ldr	w0, [sp, 44]
+  90 00d4 00040011 		add	w0, w0, 1
+  91 00d8 E02F00B9 		str	w0, [sp, 44]
+  92              	.L5:
+  93 00dc E02F80B9 		ldrsw	x0, [sp, 44]
+  94 00e0 E10F40F9 		ldr	x1, [sp, 24]
+  95 00e4 2000008B 		add	x0, x1, x0
+  96 00e8 00004039 		ldrb	w0, [x0]
+  97 00ec 1F000071 		cmp	w0, 0
+  98 00f0 41FCFF54 		bne	.L7
+  99 00f4 E10F40F9 		ldr	x1, [sp, 24]
+ 100 00f8 00000090 		adrp	x0, .LC0
+ 101 00fc 00000091 		add	x0, x0, :lo12:.LC0
+ 102 0100 00000094 		bl	printf
+ 103 0104 00008052 		mov	w0, 0
+ 104 0108 FD7BC3A8 		ldp	x29, x30, [sp], 48
+ 105              		.cfi_restore 30
+ 106              		.cfi_restore 29
+ 107              		.cfi_def_cfa_offset 0
+ 108 010c C0035FD6 		ret
+ 109              		.cfi_endproc
+ 110              	.LFE7:
+ 111              		.size	upper, .-upper
+AARCH64 GAS  as_02.s 			page 3
+
+
+ 112              		.section	.rodata
+ 113              		.align	3
+ 114              	.LC1:
+ 115 0010 456E7465 		.string	"Enter the string to be converted: "
+ 115      72207468 
+ 115      65207374 
+ 115      72696E67 
+ 115      20746F20 
+ 116 0033 00000000 		.align	3
+ 116      00
+ 117              	.LC2:
+ 118 0038 25333173 		.string	"%31s"
+ 118      00
+ 119 003d 000000   		.align	3
+ 120              	.LC3:
+ 121 0040 456E7465 		.string	"Enter 1 to convert to use the built-in function and 2 to use the hard-coded function"
+ 121      72203120 
+ 121      746F2063 
+ 121      6F6E7665 
+ 121      72742074 
+ 122 0095 000000   		.align	3
+ 123              	.LC4:
+ 124 0098 20256300 		.string	" %c"
+ 125 009c 00000000 		.align	3
+ 126              	.LC5:
+ 127 00a0 496E7661 		.string	"Invalid Input. Please start again"
+ 127      6C696420 
+ 127      496E7075 
+ 127      742E2050 
+ 127      6C656173 
+ 128              		.text
+ 129              		.align	2
+ 130              		.global	main
+ 131              		.type	main, %function
+ 132              	main:
+ 133              	.LFB8:
+ 134              		.cfi_startproc
+ 135 0110 FD7BBCA9 		stp	x29, x30, [sp, -64]!
+ 136              		.cfi_def_cfa_offset 64
+ 137              		.cfi_offset 29, -64
+ 138              		.cfi_offset 30, -56
+ 139 0114 FD030091 		mov	x29, sp
+ 140 0118 FF3F00B9 		str	wzr, [sp, 60]
+ 141 011c 00000090 		adrp	x0, .LC1
+ 142 0120 00000091 		add	x0, x0, :lo12:.LC1
+ 143 0124 00000094 		bl	printf
+ 144 0128 E0630091 		add	x0, sp, 24
+ 145 012c E10300AA 		mov	x1, x0
+ 146 0130 00000090 		adrp	x0, .LC2
+ 147 0134 00000091 		add	x0, x0, :lo12:.LC2
+ 148 0138 00000094 		bl	__isoc99_scanf
+ 149 013c 1F000014 		b	.L10
+ 150              	.L13:
+ 151 0140 E03F40B9 		ldr	w0, [sp, 60]
+ 152 0144 1F000071 		cmp	w0, 0
+ 153 0148 81030054 		bne	.L10
+ 154 014c 00000090 		adrp	x0, .LC3
+AARCH64 GAS  as_02.s 			page 4
+
+
+ 155 0150 00000091 		add	x0, x0, :lo12:.LC3
+ 156 0154 00000094 		bl	puts
+ 157 0158 E05F0091 		add	x0, sp, 23
+ 158 015c E10300AA 		mov	x1, x0
+ 159 0160 00000090 		adrp	x0, .LC4
+ 160 0164 00000091 		add	x0, x0, :lo12:.LC4
+ 161 0168 00000094 		bl	__isoc99_scanf
+ 162 016c E05F4039 		ldrb	w0, [sp, 23]
+ 163 0170 1FC40071 		cmp	w0, 49
+ 164 0174 C1000054 		bne	.L11
+ 165 0178 E0630091 		add	x0, sp, 24
+ 166 017c 00000094 		bl	built_in
+ 167 0180 20008052 		mov	w0, 1
+ 168 0184 E03F00B9 		str	w0, [sp, 60]
+ 169 0188 0C000014 		b	.L10
+ 170              	.L11:
+ 171 018c E05F4039 		ldrb	w0, [sp, 23]
+ 172 0190 1FC80071 		cmp	w0, 50
+ 173 0194 C1000054 		bne	.L12
+ 174 0198 E0630091 		add	x0, sp, 24
+ 175 019c 00000094 		bl	upper
+ 176 01a0 40008052 		mov	w0, 2
+ 177 01a4 E03F00B9 		str	w0, [sp, 60]
+ 178 01a8 04000014 		b	.L10
+ 179              	.L12:
+ 180 01ac 00000090 		adrp	x0, .LC5
+ 181 01b0 00000091 		add	x0, x0, :lo12:.LC5
+ 182 01b4 00000094 		bl	puts
+ 183              	.L10:
+ 184 01b8 E03F40B9 		ldr	w0, [sp, 60]
+ 185 01bc 1F000071 		cmp	w0, 0
+ 186 01c0 00FCFF54 		beq	.L13
+ 187 01c4 00008052 		mov	w0, 0
+ 188 01c8 FD7BC4A8 		ldp	x29, x30, [sp], 64
+ 189              		.cfi_restore 30
+ 190              		.cfi_restore 29
+ 191              		.cfi_def_cfa_offset 0
+ 192 01cc C0035FD6 		ret
+ 193              		.cfi_endproc
+ 194              	.LFE8:
+ 195              		.size	main, .-main
+ 196              		.ident	"GCC: (Debian 8.3.0-6) 8.3.0"
+ 197              		.section	.note.GNU-stack,"",@progbits
+AARCH64 GAS  as_02.s 			page 5
+
+
+DEFINED SYMBOLS
+                            *ABS*:0000000000000000 as_02.c
+             as_02.s:4      .text:0000000000000000 $x
+             as_02.s:7      .text:0000000000000000 built_in
+             as_02.s:47     .rodata:0000000000000000 $d
+             as_02.s:54     .text:0000000000000064 upper
+             as_02.s:132    .text:0000000000000110 main
+                        .eh_frame:0000000000000014 $d
+
+UNDEFINED SYMBOLS
+toupper
+putchar
+printf
+__isoc99_scanf
+puts

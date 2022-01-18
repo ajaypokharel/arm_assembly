@@ -1,0 +1,87 @@
+AARCH64 GAS  int_add.asm 			page 1
+
+
+   1              	.data
+   2              	
+   3 0000 54686520 	str1: .asciz "The sum of %lx%lx and %lx%lx is %016lx\n"
+   3      73756D20 
+   3      6F662025 
+   3      6C78256C 
+   3      7820616E 
+   4 0028 59657320 	str2: .asciz "Yes there is a carry.\n"
+   4      74686572 
+   4      65206973 
+   4      20612063 
+   4      61727279 
+   5 003f 4E6F2C20 	str3: .asciz "No, there is no carry.\n"
+   5      74686572 
+   5      65206973 
+   5      206E6F20 
+   5      63617272 
+   6              	
+   7              	.text
+   8              	
+   9              	.global main
+  10              	
+  11              	main:
+  12 0000 FD7BBFA9 		stp x29, x30, [sp, #-16]!
+  13 0004 010080D2 		movz x1, #0x00000000
+  14 0008 0100C0F2 		movk x1, #0x00000000, lsl #32
+  15 000c 020080D2 		movz x2, #0x00000000
+  16 0010 2200C0F2 		movk x2, #0x00000001, lsl #32
+  17 0014 030080D2 		movz x3, #0x00000000
+  18 0018 0300C0F2 		movk x3, #0x00000000, lsl #32
+  19 001c 644583D2 		movz x4, #0x00001A2B
+  20 0020 E405C2F2 		movk x4, #0x0000102F, lsl #32
+  21              	
+  22 0024 2500038B 		add x5, x1, x3
+  23 0028 460004AB 		adds x6, x2, x4
+  24 002c C50005AB 		adds x5, x6, x5
+  25              		
+  26 0030 07423BD5 		mrs x7, NZCV
+  27 0034 E7031FF8 		str x7, [sp, #-16]
+  28              		
+  29 0038 C0010058 		ldr x0, =str1
+  30 003c 00000094 		bl printf
+  31              	
+  32 0040 07421BD5 		msr NZCV, x7
+  33 0044 42000054 		bcs yes_carry
+  34 0048 04000014 		b no_carry
+  35              	
+  36              	yes_carry:
+  37 004c 60010058 		ldr x0, =str2
+  38 0050 00000094 		bl printf
+  39 0054 04000014 		b end
+  40              	
+  41              	no_carry:
+  42 0058 40010058 		ldr x0, =str3
+  43 005c 00000094 		bl printf
+  44 0060 01000014 		b end
+  45              	
+AARCH64 GAS  int_add.asm 			page 2
+
+
+  46              	end:
+  47 0064 FD7BC1A8 		ldp x29, x30, [sp], #16
+  48 0068 00008052 		mov w0, #0
+  49 006c C0035FD6 		ret
+  49      00000000 
+  49      00000000 
+  49      00000000 
+  49      00000000 
+AARCH64 GAS  int_add.asm 			page 3
+
+
+DEFINED SYMBOLS
+         int_add.asm:3      .data:0000000000000000 str1
+         int_add.asm:4      .data:0000000000000028 str2
+         int_add.asm:5      .data:000000000000003f str3
+         int_add.asm:11     .text:0000000000000000 main
+         int_add.asm:12     .text:0000000000000000 $x
+         int_add.asm:36     .text:000000000000004c yes_carry
+         int_add.asm:41     .text:0000000000000058 no_carry
+         int_add.asm:46     .text:0000000000000064 end
+         int_add.asm:49     .text:0000000000000070 $d
+
+UNDEFINED SYMBOLS
+printf

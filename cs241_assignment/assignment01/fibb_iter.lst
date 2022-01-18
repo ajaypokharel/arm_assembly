@@ -1,0 +1,149 @@
+AARCH64 GAS  fibb_iter.s 			page 1
+
+
+   1              		.arch armv8-a
+   2              		.file	"fibb_iter.c"
+   3              		.text
+   4              		.align	2
+   5              		.global	fibb
+   6              		.type	fibb, %function
+   7              	fibb:
+   8              	.LFB0:
+   9              		.cfi_startproc
+  10 0000 FD7BBCA9 		stp	x29, x30, [sp, -64]!
+  11              		.cfi_def_cfa_offset 64
+  12              		.cfi_offset 29, -64
+  13              		.cfi_offset 30, -56
+  14 0004 FD030091 		mov	x29, sp
+  15              		.cfi_def_cfa_register 29
+  16 0008 A01F00B9 		str	w0, [x29, 28]
+  17 000c E0030091 		mov	x0, sp
+  18 0010 EA0300AA 		mov	x10, x0
+  19 0014 A01F40B9 		ldr	w0, [x29, 28]
+  20 0018 00040011 		add	w0, w0, 1
+  21 001c 097C4093 		sxtw	x9, w0
+  22 0020 290500D1 		sub	x9, x9, #1
+  23 0024 A91B00F9 		str	x9, [x29, 48]
+  24 0028 097C4093 		sxtw	x9, w0
+  25 002c E70309AA 		mov	x7, x9
+  26 0030 080080D2 		mov	x8, 0
+  27 0034 E9FC7BD3 		lsr	x9, x7, 59
+  28 0038 04E97BD3 		lsl	x4, x8, 5
+  29 003c 240104AA 		orr	x4, x9, x4
+  30 0040 E3E87BD3 		lsl	x3, x7, 5
+  31 0044 037C4093 		sxtw	x3, w0
+  32 0048 E50303AA 		mov	x5, x3
+  33 004c 060080D2 		mov	x6, 0
+  34 0050 A3FC7BD3 		lsr	x3, x5, 59
+  35 0054 C2E87BD3 		lsl	x2, x6, 5
+  36 0058 620002AA 		orr	x2, x3, x2
+  37 005c A1E87BD3 		lsl	x1, x5, 5
+  38 0060 007C4093 		sxtw	x0, w0
+  39 0064 00F47ED3 		lsl	x0, x0, 2
+  40 0068 003C0091 		add	x0, x0, 15
+  41 006c 00FC44D3 		lsr	x0, x0, 4
+  42 0070 00EC7CD3 		lsl	x0, x0, 4
+  43 0074 FF6320CB 		sub	sp, sp, x0
+  44 0078 E0030091 		mov	x0, sp
+  45 007c 000C0091 		add	x0, x0, 3
+  46 0080 00FC42D3 		lsr	x0, x0, 2
+  47 0084 00F47ED3 		lsl	x0, x0, 2
+  48 0088 A01700F9 		str	x0, [x29, 40]
+  49 008c A01740F9 		ldr	x0, [x29, 40]
+  50 0090 1F0000B9 		str	wzr, [x0]
+  51 0094 A01740F9 		ldr	x0, [x29, 40]
+  52 0098 21008052 		mov	w1, 1
+  53 009c 010400B9 		str	w1, [x0, 4]
+  54 00a0 40008052 		mov	w0, 2
+  55 00a4 A03F00B9 		str	w0, [x29, 60]
+  56 00a8 12000014 		b	.L2
+  57              	.L3:
+AARCH64 GAS  fibb_iter.s 			page 2
+
+
+  58 00ac A03F40B9 		ldr	w0, [x29, 60]
+  59 00b0 01040051 		sub	w1, w0, #1
+  60 00b4 A01740F9 		ldr	x0, [x29, 40]
+  61 00b8 217C4093 		sxtw	x1, w1
+  62 00bc 017861B8 		ldr	w1, [x0, x1, lsl 2]
+  63 00c0 A03F40B9 		ldr	w0, [x29, 60]
+  64 00c4 02080051 		sub	w2, w0, #2
+  65 00c8 A01740F9 		ldr	x0, [x29, 40]
+  66 00cc 427C4093 		sxtw	x2, w2
+  67 00d0 007862B8 		ldr	w0, [x0, x2, lsl 2]
+  68 00d4 2200000B 		add	w2, w1, w0
+  69 00d8 A01740F9 		ldr	x0, [x29, 40]
+  70 00dc A13F80B9 		ldrsw	x1, [x29, 60]
+  71 00e0 027821B8 		str	w2, [x0, x1, lsl 2]
+  72 00e4 A03F40B9 		ldr	w0, [x29, 60]
+  73 00e8 00040011 		add	w0, w0, 1
+  74 00ec A03F00B9 		str	w0, [x29, 60]
+  75              	.L2:
+  76 00f0 A13F40B9 		ldr	w1, [x29, 60]
+  77 00f4 A01F40B9 		ldr	w0, [x29, 28]
+  78 00f8 3F00006B 		cmp	w1, w0
+  79 00fc 8DFDFF54 		ble	.L3
+  80 0100 A01740F9 		ldr	x0, [x29, 40]
+  81 0104 A11F80B9 		ldrsw	x1, [x29, 28]
+  82 0108 007861B8 		ldr	w0, [x0, x1, lsl 2]
+  83 010c 5F010091 		mov	sp, x10
+  84 0110 BF030091 		mov	sp, x29
+  85 0114 FD7BC4A8 		ldp	x29, x30, [sp], 64
+  86              		.cfi_restore 30
+  87              		.cfi_restore 29
+  88              		.cfi_def_cfa 31, 0
+  89 0118 C0035FD6 		ret
+  90              		.cfi_endproc
+  91              	.LFE0:
+  92              		.size	fibb, .-fibb
+  93              		.section	.rodata
+  94              		.align	3
+  95              	.LC0:
+  96 0000 25640A00 		.string	"%d\n"
+  97              		.text
+  98              		.align	2
+  99              		.global	main
+ 100              		.type	main, %function
+ 101              	main:
+ 102              	.LFB1:
+ 103              		.cfi_startproc
+ 104 011c FD7BBEA9 		stp	x29, x30, [sp, -32]!
+ 105              		.cfi_def_cfa_offset 32
+ 106              		.cfi_offset 29, -32
+ 107              		.cfi_offset 30, -24
+ 108 0120 FD030091 		mov	x29, sp
+ 109 0124 80018052 		mov	w0, 12
+ 110 0128 E01F00B9 		str	w0, [sp, 28]
+ 111 012c E01F40B9 		ldr	w0, [sp, 28]
+ 112 0130 00000094 		bl	fibb
+ 113 0134 E103002A 		mov	w1, w0
+ 114 0138 00000090 		adrp	x0, .LC0
+AARCH64 GAS  fibb_iter.s 			page 3
+
+
+ 115 013c 00000091 		add	x0, x0, :lo12:.LC0
+ 116 0140 00000094 		bl	printf
+ 117 0144 00008052 		mov	w0, 0
+ 118 0148 FD7BC2A8 		ldp	x29, x30, [sp], 32
+ 119              		.cfi_restore 30
+ 120              		.cfi_restore 29
+ 121              		.cfi_def_cfa_offset 0
+ 122 014c C0035FD6 		ret
+ 123              		.cfi_endproc
+ 124              	.LFE1:
+ 125              		.size	main, .-main
+ 126              		.ident	"GCC: (Debian 8.3.0-6) 8.3.0"
+ 127              		.section	.note.GNU-stack,"",@progbits
+AARCH64 GAS  fibb_iter.s 			page 4
+
+
+DEFINED SYMBOLS
+                            *ABS*:0000000000000000 fibb_iter.c
+         fibb_iter.s:4      .text:0000000000000000 $x
+         fibb_iter.s:7      .text:0000000000000000 fibb
+         fibb_iter.s:94     .rodata:0000000000000000 $d
+         fibb_iter.s:101    .text:000000000000011c main
+                        .eh_frame:0000000000000014 $d
+
+UNDEFINED SYMBOLS
+printf

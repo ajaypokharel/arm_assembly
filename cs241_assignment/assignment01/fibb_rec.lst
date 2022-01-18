@@ -1,0 +1,96 @@
+AARCH64 GAS  fibb_rec.s 			page 1
+
+
+   1              		.arch armv8-a
+   2              		.file	"fibb_rec.c"
+   3              		.text
+   4              		.align	2
+   5              		.global	fibb
+   6              		.type	fibb, %function
+   7              	fibb:
+   8              	.LFB0:
+   9              		.cfi_startproc
+  10 0000 FD7BBDA9 		stp	x29, x30, [sp, -48]!
+  11              		.cfi_def_cfa_offset 48
+  12              		.cfi_offset 29, -48
+  13              		.cfi_offset 30, -40
+  14 0004 FD030091 		mov	x29, sp
+  15 0008 F30B00F9 		str	x19, [sp, 16]
+  16              		.cfi_offset 19, -32
+  17 000c E02F00B9 		str	w0, [sp, 44]
+  18 0010 E02F40B9 		ldr	w0, [sp, 44]
+  19 0014 1F040071 		cmp	w0, 1
+  20 0018 6C000054 		bgt	.L2
+  21 001c E02F40B9 		ldr	w0, [sp, 44]
+  22 0020 09000014 		b	.L3
+  23              	.L2:
+  24 0024 E02F40B9 		ldr	w0, [sp, 44]
+  25 0028 00040051 		sub	w0, w0, #1
+  26 002c 00000094 		bl	fibb
+  27 0030 F303002A 		mov	w19, w0
+  28 0034 E02F40B9 		ldr	w0, [sp, 44]
+  29 0038 00080051 		sub	w0, w0, #2
+  30 003c 00000094 		bl	fibb
+  31 0040 6002000B 		add	w0, w19, w0
+  32              	.L3:
+  33 0044 F30B40F9 		ldr	x19, [sp, 16]
+  34 0048 FD7BC3A8 		ldp	x29, x30, [sp], 48
+  35              		.cfi_restore 30
+  36              		.cfi_restore 29
+  37              		.cfi_restore 19
+  38              		.cfi_def_cfa_offset 0
+  39 004c C0035FD6 		ret
+  40              		.cfi_endproc
+  41              	.LFE0:
+  42              		.size	fibb, .-fibb
+  43              		.section	.rodata
+  44              		.align	3
+  45              	.LC0:
+  46 0000 256400   		.string	"%d"
+  47              		.text
+  48              		.align	2
+  49              		.global	main
+  50              		.type	main, %function
+  51              	main:
+  52              	.LFB1:
+  53              		.cfi_startproc
+  54 0050 FD7BBEA9 		stp	x29, x30, [sp, -32]!
+  55              		.cfi_def_cfa_offset 32
+  56              		.cfi_offset 29, -32
+  57              		.cfi_offset 30, -24
+AARCH64 GAS  fibb_rec.s 			page 2
+
+
+  58 0054 FD030091 		mov	x29, sp
+  59 0058 80018052 		mov	w0, 12
+  60 005c E01F00B9 		str	w0, [sp, 28]
+  61 0060 E01F40B9 		ldr	w0, [sp, 28]
+  62 0064 00000094 		bl	fibb
+  63 0068 E103002A 		mov	w1, w0
+  64 006c 00000090 		adrp	x0, .LC0
+  65 0070 00000091 		add	x0, x0, :lo12:.LC0
+  66 0074 00000094 		bl	printf
+  67 0078 00008052 		mov	w0, 0
+  68 007c FD7BC2A8 		ldp	x29, x30, [sp], 32
+  69              		.cfi_restore 30
+  70              		.cfi_restore 29
+  71              		.cfi_def_cfa_offset 0
+  72 0080 C0035FD6 		ret
+  73              		.cfi_endproc
+  74              	.LFE1:
+  75              		.size	main, .-main
+  76              		.ident	"GCC: (Debian 8.3.0-6) 8.3.0"
+  77              		.section	.note.GNU-stack,"",@progbits
+AARCH64 GAS  fibb_rec.s 			page 3
+
+
+DEFINED SYMBOLS
+                            *ABS*:0000000000000000 fibb_rec.c
+          fibb_rec.s:4      .text:0000000000000000 $x
+          fibb_rec.s:7      .text:0000000000000000 fibb
+          fibb_rec.s:44     .rodata:0000000000000000 $d
+          fibb_rec.s:51     .text:0000000000000050 main
+                        .eh_frame:0000000000000014 $d
+
+UNDEFINED SYMBOLS
+printf

@@ -1,0 +1,259 @@
+AARCH64 GAS  as_02.s 			page 1
+
+
+   1              		.arch armv8-a
+   2              		.file	"as_02.c"
+   3              		.text
+   4              		.section	.rodata
+   5              		.align	3
+   6              	.LC0:
+   7 0000 4C6F7765 		.string	"Lower Case: %s\n"
+   7      72204361 
+   7      73653A20 
+   7      25730A00 
+   8              		.text
+   9              		.align	2
+  10              		.global	lower
+  11              		.type	lower, %function
+  12              	lower:
+  13              	.LFB0:
+  14              		.cfi_startproc
+  15 0000 FD7BBDA9 		stp	x29, x30, [sp, -48]!
+  16              		.cfi_def_cfa_offset 48
+  17              		.cfi_offset 29, -48
+  18              		.cfi_offset 30, -40
+  19 0004 FD030091 		mov	x29, sp
+  20 0008 E00F00F9 		str	x0, [sp, 24]
+  21 000c E11700B9 		str	w1, [sp, 20]
+  22 0010 FF2F00B9 		str	wzr, [sp, 44]
+  23 0014 1A000014 		b	.L2
+  24              	.L4:
+  25 0018 E02F80B9 		ldrsw	x0, [sp, 44]
+  26 001c E10F40F9 		ldr	x1, [sp, 24]
+  27 0020 2000008B 		add	x0, x1, x0
+  28 0024 00004039 		ldrb	w0, [x0]
+  29 0028 1F000171 		cmp	w0, 64
+  30 002c 29020054 		bls	.L3
+  31 0030 E02F80B9 		ldrsw	x0, [sp, 44]
+  32 0034 E10F40F9 		ldr	x1, [sp, 24]
+  33 0038 2000008B 		add	x0, x1, x0
+  34 003c 00004039 		ldrb	w0, [x0]
+  35 0040 1F680171 		cmp	w0, 90
+  36 0044 68010054 		bhi	.L3
+  37 0048 E02F80B9 		ldrsw	x0, [sp, 44]
+  38 004c E10F40F9 		ldr	x1, [sp, 24]
+  39 0050 2000008B 		add	x0, x1, x0
+  40 0054 01004039 		ldrb	w1, [x0]
+  41 0058 E02F80B9 		ldrsw	x0, [sp, 44]
+  42 005c E20F40F9 		ldr	x2, [sp, 24]
+  43 0060 4000008B 		add	x0, x2, x0
+  44 0064 21800011 		add	w1, w1, 32
+  45 0068 211C0012 		and	w1, w1, 255
+  46 006c 01000039 		strb	w1, [x0]
+  47              	.L3:
+  48 0070 E02F40B9 		ldr	w0, [sp, 44]
+  49 0074 00040011 		add	w0, w0, 1
+  50 0078 E02F00B9 		str	w0, [sp, 44]
+  51              	.L2:
+  52 007c E12F40B9 		ldr	w1, [sp, 44]
+  53 0080 E01740B9 		ldr	w0, [sp, 20]
+  54 0084 3F00006B 		cmp	w1, w0
+AARCH64 GAS  as_02.s 			page 2
+
+
+  55 0088 8DFCFF54 		ble	.L4
+  56 008c E10F40F9 		ldr	x1, [sp, 24]
+  57 0090 00000090 		adrp	x0, .LC0
+  58 0094 00000091 		add	x0, x0, :lo12:.LC0
+  59 0098 00000094 		bl	printf
+  60 009c 00008052 		mov	w0, 0
+  61 00a0 FD7BC3A8 		ldp	x29, x30, [sp], 48
+  62              		.cfi_restore 30
+  63              		.cfi_restore 29
+  64              		.cfi_def_cfa_offset 0
+  65 00a4 C0035FD6 		ret
+  66              		.cfi_endproc
+  67              	.LFE0:
+  68              		.size	lower, .-lower
+  69              		.section	.rodata
+  70              		.align	3
+  71              	.LC1:
+  72 0010 55707065 		.string	"Upper Case: %s\n"
+  72      72204361 
+  72      73653A20 
+  72      25730A00 
+  73              		.text
+  74              		.align	2
+  75              		.global	upper
+  76              		.type	upper, %function
+  77              	upper:
+  78              	.LFB1:
+  79              		.cfi_startproc
+  80 00a8 FD7BBDA9 		stp	x29, x30, [sp, -48]!
+  81              		.cfi_def_cfa_offset 48
+  82              		.cfi_offset 29, -48
+  83              		.cfi_offset 30, -40
+  84 00ac FD030091 		mov	x29, sp
+  85 00b0 E00F00F9 		str	x0, [sp, 24]
+  86 00b4 FF2F00B9 		str	wzr, [sp, 44]
+  87 00b8 1A000014 		b	.L7
+  88              	.L9:
+  89 00bc E02F80B9 		ldrsw	x0, [sp, 44]
+  90 00c0 E10F40F9 		ldr	x1, [sp, 24]
+  91 00c4 2000008B 		add	x0, x1, x0
+  92 00c8 00004039 		ldrb	w0, [x0]
+  93 00cc 1F800171 		cmp	w0, 96
+  94 00d0 29020054 		bls	.L8
+  95 00d4 E02F80B9 		ldrsw	x0, [sp, 44]
+  96 00d8 E10F40F9 		ldr	x1, [sp, 24]
+  97 00dc 2000008B 		add	x0, x1, x0
+  98 00e0 00004039 		ldrb	w0, [x0]
+  99 00e4 1FE80171 		cmp	w0, 122
+ 100 00e8 68010054 		bhi	.L8
+ 101 00ec E02F80B9 		ldrsw	x0, [sp, 44]
+ 102 00f0 E10F40F9 		ldr	x1, [sp, 24]
+ 103 00f4 2000008B 		add	x0, x1, x0
+ 104 00f8 01004039 		ldrb	w1, [x0]
+ 105 00fc E02F80B9 		ldrsw	x0, [sp, 44]
+ 106 0100 E20F40F9 		ldr	x2, [sp, 24]
+ 107 0104 4000008B 		add	x0, x2, x0
+ 108 0108 21800051 		sub	w1, w1, #32
+AARCH64 GAS  as_02.s 			page 3
+
+
+ 109 010c 211C0012 		and	w1, w1, 255
+ 110 0110 01000039 		strb	w1, [x0]
+ 111              	.L8:
+ 112 0114 E02F40B9 		ldr	w0, [sp, 44]
+ 113 0118 00040011 		add	w0, w0, 1
+ 114 011c E02F00B9 		str	w0, [sp, 44]
+ 115              	.L7:
+ 116 0120 E02F80B9 		ldrsw	x0, [sp, 44]
+ 117 0124 E10F40F9 		ldr	x1, [sp, 24]
+ 118 0128 2000008B 		add	x0, x1, x0
+ 119 012c 00004039 		ldrb	w0, [x0]
+ 120 0130 1F000071 		cmp	w0, 0
+ 121 0134 41FCFF54 		bne	.L9
+ 122 0138 E10F40F9 		ldr	x1, [sp, 24]
+ 123 013c 00000090 		adrp	x0, .LC1
+ 124 0140 00000091 		add	x0, x0, :lo12:.LC1
+ 125 0144 00000094 		bl	printf
+ 126 0148 00008052 		mov	w0, 0
+ 127 014c FD7BC3A8 		ldp	x29, x30, [sp], 48
+ 128              		.cfi_restore 30
+ 129              		.cfi_restore 29
+ 130              		.cfi_def_cfa_offset 0
+ 131 0150 C0035FD6 		ret
+ 132              		.cfi_endproc
+ 133              	.LFE1:
+ 134              		.size	upper, .-upper
+ 135              		.section	.rodata
+ 136              		.align	3
+ 137              	.LC3:
+ 138 0020 74686520 		.string	"the pointer to the original string: 0x%x\n"
+ 138      706F696E 
+ 138      74657220 
+ 138      746F2074 
+ 138      6865206F 
+ 139 004a 00000000 		.align	3
+ 139      0000
+ 140              	.LC4:
+ 141 0050 74686520 		.string	"the modified strings are: 0x%x and 0x%x\n"
+ 141      6D6F6469 
+ 141      66696564 
+ 141      20737472 
+ 141      696E6773 
+ 142              		.text
+ 143              		.align	2
+ 144              		.global	main
+ 145              		.type	main, %function
+ 146              	main:
+ 147              	.LFB2:
+ 148              		.cfi_startproc
+ 149 0154 FD7BBBA9 		stp	x29, x30, [sp, -80]!
+ 150              		.cfi_def_cfa_offset 80
+ 151              		.cfi_offset 29, -80
+ 152              		.cfi_offset 30, -72
+ 153 0158 FD030091 		mov	x29, sp
+ 154 015c 00000090 		adrp	x0, .LC2
+ 155 0160 01000091 		add	x1, x0, :lo12:.LC2
+ 156 0164 E0E30091 		add	x0, sp, 56
+AARCH64 GAS  as_02.s 			page 4
+
+
+ 157 0168 220040F9 		ldr	x2, [x1]
+ 158 016c 020000F9 		str	x2, [x0]
+ 159 0170 215040F8 		ldr	x1, [x1, 5]
+ 160 0174 015000F8 		str	x1, [x0, 5]
+ 161 0178 00000090 		adrp	x0, .LC2
+ 162 017c 01000091 		add	x1, x0, :lo12:.LC2
+ 163 0180 E0A30091 		add	x0, sp, 40
+ 164 0184 220040F9 		ldr	x2, [x1]
+ 165 0188 020000F9 		str	x2, [x0]
+ 166 018c 215040F8 		ldr	x1, [x1, 5]
+ 167 0190 015000F8 		str	x1, [x0, 5]
+ 168 0194 00000090 		adrp	x0, .LC2
+ 169 0198 01000091 		add	x1, x0, :lo12:.LC2
+ 170 019c E0630091 		add	x0, sp, 24
+ 171 01a0 220040F9 		ldr	x2, [x1]
+ 172 01a4 020000F9 		str	x2, [x0]
+ 173 01a8 215040F8 		ldr	x1, [x1, 5]
+ 174 01ac 015000F8 		str	x1, [x0, 5]
+ 175 01b0 80018052 		mov	w0, 12
+ 176 01b4 E04F00B9 		str	w0, [sp, 76]
+ 177 01b8 E0A30091 		add	x0, sp, 40
+ 178 01bc E14F40B9 		ldr	w1, [sp, 76]
+ 179 01c0 00000094 		bl	lower
+ 180 01c4 E02F0139 		strb	w0, [sp, 75]
+ 181 01c8 E0630091 		add	x0, sp, 24
+ 182 01cc 00000094 		bl	upper
+ 183 01d0 E02B0139 		strb	w0, [sp, 74]
+ 184 01d4 E0E30091 		add	x0, sp, 56
+ 185 01d8 E10300AA 		mov	x1, x0
+ 186 01dc 00000090 		adrp	x0, .LC3
+ 187 01e0 00000091 		add	x0, x0, :lo12:.LC3
+ 188 01e4 00000094 		bl	printf
+ 189 01e8 E1630091 		add	x1, sp, 24
+ 190 01ec E0A30091 		add	x0, sp, 40
+ 191 01f0 E20301AA 		mov	x2, x1
+ 192 01f4 E10300AA 		mov	x1, x0
+ 193 01f8 00000090 		adrp	x0, .LC4
+ 194 01fc 00000091 		add	x0, x0, :lo12:.LC4
+ 195 0200 00000094 		bl	printf
+ 196 0204 00008052 		mov	w0, 0
+ 197 0208 FD7BC5A8 		ldp	x29, x30, [sp], 80
+ 198              		.cfi_restore 30
+ 199              		.cfi_restore 29
+ 200              		.cfi_def_cfa_offset 0
+ 201 020c C0035FD6 		ret
+ 202              		.cfi_endproc
+ 203              	.LFE2:
+ 204              		.size	main, .-main
+ 205              		.section	.rodata
+ 206 0079 00000000 		.align	3
+ 206      000000
+ 207              	.LC2:
+ 208 0080 48656C6C 		.string	"Hello World!"
+ 208      6F20576F 
+ 208      726C6421 
+ 208      00
+ 209              		.text
+AARCH64 GAS  as_02.s 			page 5
+
+
+ 210              		.ident	"GCC: (Debian 8.3.0-6) 8.3.0"
+ 211              		.section	.note.GNU-stack,"",@progbits
+AARCH64 GAS  as_02.s 			page 6
+
+
+DEFINED SYMBOLS
+                            *ABS*:0000000000000000 as_02.c
+             as_02.s:5      .rodata:0000000000000000 $d
+             as_02.s:9      .text:0000000000000000 $x
+             as_02.s:12     .text:0000000000000000 lower
+             as_02.s:77     .text:00000000000000a8 upper
+             as_02.s:146    .text:0000000000000154 main
+                        .eh_frame:0000000000000014 $d
+
+UNDEFINED SYMBOLS
+printf

@@ -1,0 +1,57 @@
+AARCH64 GAS  ass0A.asm 			page 1
+
+
+   1              	.data
+   2              	
+   3 0000 54686520 	statement: .asciz "The fibbonacci Number for %i is %i\n"
+   3      66696262 
+   3      6F6E6163 
+   3      6369204E 
+   3      756D6265 
+   4              	
+   5              	.text
+   6              	
+   7              	.global main
+   8              	
+   9              	main:
+  10 0000 FD7BBFA9 		stp x29, x30, [sp, #-16]!
+  11 0004 810180D2 		mov x1, #12
+  12 0008 220080D2 		mov x2, #1
+  13 000c 230080D2 		mov x3, #1
+  14 0010 040080D2 		mov x4, #0
+  15 0014 250080D2 		mov x5, #1
+  16 0018 060080D2 		mov x6, #0
+  17              	
+  18              	
+  19              	loop:
+  20 001c 5F0001EB 		cmp x2, x1
+  21 0020 CA000054 		b.ge end
+  22 0024 4200038B 		add x2, x2, x3
+  23 0028 E60305AA 		mov x6, x5
+  24 002c A500048B 		add x5, x5, x4
+  25 0030 E40306AA 		mov x4, x6
+  26 0034 FAFFFF17 		b loop
+  27              		
+  28              	
+  29              	end:
+  30 0038 E20305AA 		mov x2, x5
+  31 003c A0000058 		ldr x0, =statement
+  32 0040 00000094 		bl printf
+  33 0044 FD7BC1A8 		ldp x29, x30, [sp], #16
+  34 0048 00008052 		mov w0, #0
+  35 004c C0035FD6 		ret
+  35      00000000 
+  35      00000000 
+AARCH64 GAS  ass0A.asm 			page 2
+
+
+DEFINED SYMBOLS
+           ass0A.asm:3      .data:0000000000000000 statement
+           ass0A.asm:9      .text:0000000000000000 main
+           ass0A.asm:10     .text:0000000000000000 $x
+           ass0A.asm:19     .text:000000000000001c loop
+           ass0A.asm:29     .text:0000000000000038 end
+           ass0A.asm:35     .text:0000000000000050 $d
+
+UNDEFINED SYMBOLS
+printf

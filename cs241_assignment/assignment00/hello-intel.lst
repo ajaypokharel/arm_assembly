@@ -1,0 +1,63 @@
+GAS LISTING hello-intel.s 			page 1
+
+
+   1              		.file	"hello.c"
+   2              		.text
+   3              		.section	.rodata
+   4              	.LC0:
+   5 0000 416A6179 		.string	"Ajay Pokharel"
+   5      20506F6B 
+   5      68617265 
+   5      6C00
+   6              		.text
+   7              		.globl	main
+   8              		.type	main, @function
+   9              	main:
+  10              	.LFB0:
+  11              		.cfi_startproc
+  12 0000 F30F1EFA 		endbr64
+  13 0004 55       		pushq	%rbp
+  14              		.cfi_def_cfa_offset 16
+  15              		.cfi_offset 6, -16
+  16 0005 4889E5   		movq	%rsp, %rbp
+  17              		.cfi_def_cfa_register 6
+  18 0008 488D3D00 		leaq	.LC0(%rip), %rdi
+  18      000000
+  19 000f E8000000 		call	puts@PLT
+  19      00
+  20 0014 B8000000 		movl	$0, %eax
+  20      00
+  21 0019 5D       		popq	%rbp
+  22              		.cfi_def_cfa 7, 8
+  23 001a C3       		ret
+  24              		.cfi_endproc
+  25              	.LFE0:
+  26              		.size	main, .-main
+  27              		.ident	"GCC: (Ubuntu 9.3.0-17ubuntu1~20.04) 9.3.0"
+  28              		.section	.note.GNU-stack,"",@progbits
+  29              		.section	.note.gnu.property,"a"
+  30              		.align 8
+  31 0000 04000000 		.long	 1f - 0f
+  32 0004 10000000 		.long	 4f - 1f
+  33 0008 05000000 		.long	 5
+  34              	0:
+  35 000c 474E5500 		.string	 "GNU"
+  36              	1:
+  37              		.align 8
+  38 0010 020000C0 		.long	 0xc0000002
+  39 0014 04000000 		.long	 3f - 2f
+  40              	2:
+  41 0018 03000000 		.long	 0x3
+  42              	3:
+  43 001c 00000000 		.align 8
+  44              	4:
+GAS LISTING hello-intel.s 			page 2
+
+
+DEFINED SYMBOLS
+                            *ABS*:0000000000000000 hello.c
+       hello-intel.s:9      .text:0000000000000000 main
+
+UNDEFINED SYMBOLS
+_GLOBAL_OFFSET_TABLE_
+puts

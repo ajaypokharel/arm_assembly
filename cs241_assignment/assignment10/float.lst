@@ -1,0 +1,112 @@
+AARCH64 GAS  float.asm 			page 1
+
+
+   1              	.data
+   2 0000 A937B5C7 		magic32: .dword 0x5fe6eb50c7b537a9
+   2      50EBE65F 
+   3 0008 506C6561 		str1: .asciz "Please enter a floating point number: \n"
+   3      73652065 
+   3      6E746572 
+   3      20612066 
+   3      6C6F6174 
+   4 0030 256C6600 		str2: .asciz "%lf"
+   5 0034 596F7520 		strx: .asciz "You entered: %lf\n"
+   5      656E7465 
+   5      7265643A 
+   5      20256C66 
+   5      0A00
+   6 0046 54686520 		str3: .asciz "The inverse square root using ARM built-in command is: %lf\n"
+   6      696E7665 
+   6      72736520 
+   6      73717561 
+   6      72652072 
+   7 0082 54686520 		str4: .asciz "The inverse square root using the Magic Constant is: %lf\n"
+   7      696E7665 
+   7      72736520 
+   7      73717561 
+   7      72652072 
+   8              		
+   9              	.text
+  10              	
+  11              	.global main
+  12              	
+  13              	main:
+  14 0000 FD7BBFA9 		stp x29, x30, [sp, #-16]!
+  15              		
+  16 0004 A0040058 		ldr x0, =str1
+  17 0008 00000094 		bl printf
+  18              	
+  19 000c A0040058 		ldr x0, =str2
+  20 0010 E1030091 		mov x1, sp
+  21 0014 00000094 		bl scanf
+  22              	
+  23 0018 E00340FD 		ldr d0, [sp]
+  24 001c 60040058 		ldr x0, =strx
+  25 0020 00000094 		bl printf
+  26              	
+  27 0024 E00340FD 		ldr d0, [sp]
+  28 0028 01C0611E 		fsqrt d1, d0
+  29 002c 02106E1E 		fmov d2, #1.0
+  30 0030 4018611E 		fdiv d0, d2, d1
+  31 0034 E0030058 		ldr x0, =str3
+  32 0038 00000094 		bl printf
+  33              	
+  34 003c E00340FD 		ldr d0, [sp]
+  35 0040 06000094 		bl inv_sqrt
+  36 0044 A0030058 		ldr x0, =str4
+  37 0048 00000094 		bl printf
+  38              	
+  39 004c FD7BC1A8 		ldp x29, x30, [sp], #16
+  40 0050 00008052 		mov w0, #0
+AARCH64 GAS  float.asm 			page 2
+
+
+  41 0054 C0035FD6 		ret
+  42              	
+  43              	inv_sqrt:
+  44 0058 FD7BBFA9 		stp x29, x30, [sp, #-16]!
+  45              		
+  46 005c 01106F1E 		fmov d1, #1.5
+  47 0060 02106C1E 		fmov d2, #0.5
+  48 0064 4208601E 		fmul d2, d2, d0
+  49              			
+  50 0068 0100669E 		fmov x1, d0
+  51 006c A0020058 		ldr x0, =magic32
+  52 0070 020040F9 		ldr x2, [x0]
+  53 0074 21FC41D3 		lsr x1, x1, #1
+  54 0078 400001CB 		sub x0, x2, x1
+  55              	
+  56 007c 0000679E 		fmov d0, x0
+  57              	
+  58 0080 4408601E 		fmul d4, d2, d0
+  59 0084 0208641E 		fmul d2, d0, d4
+  60 0088 2338621E 		fsub d3, d1, d2
+  61 008c 0008631E 		fmul d0, d0, d3		
+  62              	
+  63 0090 FD7BC1A8 		ldp x29, x30, [sp], #16
+  64 0094 C0035FD6 		ret
+  65              	
+  66              	
+  67 0098 00000000 	
+  67      00000000 
+  67      00000000 
+  67      00000000 
+  67      00000000 
+AARCH64 GAS  float.asm 			page 3
+
+
+DEFINED SYMBOLS
+           float.asm:2      .data:0000000000000000 magic32
+           float.asm:3      .data:0000000000000008 str1
+           float.asm:4      .data:0000000000000030 str2
+           float.asm:5      .data:0000000000000034 strx
+           float.asm:6      .data:0000000000000046 str3
+           float.asm:7      .data:0000000000000082 str4
+           float.asm:13     .text:0000000000000000 main
+           float.asm:14     .text:0000000000000000 $x
+           float.asm:43     .text:0000000000000058 inv_sqrt
+           float.asm:67     .text:0000000000000098 $d
+
+UNDEFINED SYMBOLS
+printf
+scanf

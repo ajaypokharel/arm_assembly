@@ -1,0 +1,47 @@
+AARCH64 GAS  int_add.asm 			page 1
+
+
+   1              	.data
+   2              	
+   3 0000 54686520 	str1: .asciz "The sum of %lx%lx and %lx%lx is %016lx%lx\n"
+   3      73756D20 
+   3      6F662025 
+   3      6C78256C 
+   3      7820616E 
+   4              	
+   5              	.text
+   6              	
+   7              	.global main
+   8              	
+   9              	main:
+  10 0000 FD7BBFA9 		stp x29, x30, [sp, #-16]!
+  11 0004 010080D2 		movz x1, #0x00000000
+  12 0008 0100C0F2 		movk x1, #0x00000000, lsl #32
+  13 000c 020080D2 		movz x2, #0x00000000
+  14 0010 2200C0F2 		movk x2, #0x00000001, lsl #32
+  15 0014 030080D2 		movz x3, #0x00000000
+  16 0018 0300C0F2 		movk x3, #0x00000000, lsl #32
+  17 001c 644583D2 		movz x4, #0x00001A2B
+  18 0020 E405C2F2 		movk x4, #0x0000102F, lsl #32
+  19              	
+  20 0024 460004AB 		adds x6, x2, x4
+  21 0028 250003BA 		adcs x5, x1, x3
+  22              	
+  23 002c A0000058 		ldr x0, =str1
+  24 0030 00000094 		bl printf
+  25 0034 FD7BC1A8 		ldp x29, x30, [sp], #16
+  26 0038 00008052 		mov w0, #0
+  27 003c C0035FD6 		ret
+  27      00000000 
+  27      00000000 
+AARCH64 GAS  int_add.asm 			page 2
+
+
+DEFINED SYMBOLS
+         int_add.asm:3      .data:0000000000000000 str1
+         int_add.asm:9      .text:0000000000000000 main
+         int_add.asm:10     .text:0000000000000000 $x
+         int_add.asm:27     .text:0000000000000040 $d
+
+UNDEFINED SYMBOLS
+printf

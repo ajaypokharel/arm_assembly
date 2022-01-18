@@ -1,0 +1,43 @@
+AARCH64 GAS  arth.asm 			page 1
+
+
+   1              	.data
+   2              	
+   3 0000 54686520 	arithmetic: .asciz "The sum of %i, %i, and %i is %i\n"
+   3      73756D20 
+   3      6F662025 
+   3      692C2025 
+   3      692C2061 
+   4              	
+   5              	.text
+   6              	
+   7              	.global main
+   8              	
+   9              	main:
+  10 0000 FD7BBFA9 		stp x29, x30, [sp, #-16]!
+  11              	
+  12 0004 41018052 		mov w1, 10
+  13 0008 62018052 		mov w2, 11
+  14 000c 83018052 		mov w3, 12
+  15 0010 2500020B 		add w5, w1, w2
+  16 0014 6400050B 		add w4, w3, w5
+  17 0018 C0000058 		ldr x0, =arithmetic
+  18 001c 00000094 		bl printf
+  19              	
+  20 0020 00008052 		mov w0, 0
+  21 0024 FD7BC1A8 		ldp x29, x30, [sp], 16
+  22 0028 C0035FD6 		ret
+  22      00000000 
+  22      00000000 
+  22      00000000 
+AARCH64 GAS  arth.asm 			page 2
+
+
+DEFINED SYMBOLS
+            arth.asm:3      .data:0000000000000000 arithmetic
+            arth.asm:9      .text:0000000000000000 main
+            arth.asm:10     .text:0000000000000000 $x
+            arth.asm:22     .text:0000000000000030 $d
+
+UNDEFINED SYMBOLS
+printf

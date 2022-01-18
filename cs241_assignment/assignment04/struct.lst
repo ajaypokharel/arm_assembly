@@ -1,0 +1,313 @@
+AARCH64 GAS  struct.s 			page 1
+
+
+   1              		.arch armv8-a
+   2              		.file	"struct.c"
+   3              		.text
+   4              		.section	.rodata
+   5              		.align	3
+   6              	.LC0:
+   7 0000 596F7520 		.string	"You will be asked to enter the coordinate points for a triangle"
+   7      77696C6C 
+   7      20626520 
+   7      61736B65 
+   7      6420746F 
+   8              		.align	3
+   9              	.LC1:
+  10 0040 456E7465 		.string	"Enter the x-axis for p1: "
+  10      72207468 
+  10      6520782D 
+  10      61786973 
+  10      20666F72 
+  11 005a 00000000 		.align	3
+  11      0000
+  12              	.LC2:
+  13 0060 256600   		.string	"%f"
+  14 0063 00000000 		.align	3
+  14      00
+  15              	.LC3:
+  16 0068 456E7465 		.string	"Enter the y-axis for p1: "
+  16      72207468 
+  16      6520792D 
+  16      61786973 
+  16      20666F72 
+  17 0082 00000000 		.align	3
+  17      0000
+  18              	.LC4:
+  19 0088 456E7465 		.string	"Enter the x-axis for p2: "
+  19      72207468 
+  19      6520782D 
+  19      61786973 
+  19      20666F72 
+  20 00a2 00000000 		.align	3
+  20      0000
+  21              	.LC5:
+  22 00a8 456E7465 		.string	"Enter the y-axis for p2: "
+  22      72207468 
+  22      6520792D 
+  22      61786973 
+  22      20666F72 
+  23 00c2 00000000 		.align	3
+  23      0000
+  24              	.LC6:
+  25 00c8 456E7465 		.string	"Enter the x-axis for p3: "
+  25      72207468 
+  25      6520782D 
+  25      61786973 
+  25      20666F72 
+  26 00e2 00000000 		.align	3
+  26      0000
+  27              	.LC7:
+AARCH64 GAS  struct.s 			page 2
+
+
+  28 00e8 456E7465 		.string	"Enter the y-axis for p3: "
+  28      72207468 
+  28      6520792D 
+  28      61786973 
+  28      20666F72 
+  29 0102 00000000 		.align	3
+  29      0000
+  30              	.LC8:
+  31 0108 54686520 		.string	"The area of the triangle for the coordinates you entered is: %2.3f\n"
+  31      61726561 
+  31      206F6620 
+  31      74686520 
+  31      74726961 
+  32              		.text
+  33              		.align	2
+  34              		.global	main
+  35              		.type	main, %function
+  36              	main:
+  37              	.LFB0:
+  38              		.cfi_startproc
+  39 0000 FD7BBBA9 		stp	x29, x30, [sp, -80]!
+  40              		.cfi_def_cfa_offset 80
+  41              		.cfi_offset 29, -80
+  42              		.cfi_offset 30, -72
+  43 0004 FD030091 		mov	x29, sp
+  44 0008 00000090 		adrp	x0, .LC0
+  45 000c 00000091 		add	x0, x0, :lo12:.LC0
+  46 0010 00000094 		bl	puts
+  47 0014 00000090 		adrp	x0, .LC1
+  48 0018 00000091 		add	x0, x0, :lo12:.LC1
+  49 001c 00000094 		bl	printf
+  50 0020 E0030191 		add	x0, sp, 64
+  51 0024 E10300AA 		mov	x1, x0
+  52 0028 00000090 		adrp	x0, .LC2
+  53 002c 00000091 		add	x0, x0, :lo12:.LC2
+  54 0030 00000094 		bl	__isoc99_scanf
+  55 0034 00000090 		adrp	x0, .LC3
+  56 0038 00000091 		add	x0, x0, :lo12:.LC3
+  57 003c 00000094 		bl	printf
+  58 0040 E0030191 		add	x0, sp, 64
+  59 0044 00100091 		add	x0, x0, 4
+  60 0048 E10300AA 		mov	x1, x0
+  61 004c 00000090 		adrp	x0, .LC2
+  62 0050 00000091 		add	x0, x0, :lo12:.LC2
+  63 0054 00000094 		bl	__isoc99_scanf
+  64 0058 00000090 		adrp	x0, .LC4
+  65 005c 00000091 		add	x0, x0, :lo12:.LC4
+  66 0060 00000094 		bl	printf
+  67 0064 E0E30091 		add	x0, sp, 56
+  68 0068 E10300AA 		mov	x1, x0
+  69 006c 00000090 		adrp	x0, .LC2
+  70 0070 00000091 		add	x0, x0, :lo12:.LC2
+  71 0074 00000094 		bl	__isoc99_scanf
+  72 0078 00000090 		adrp	x0, .LC5
+  73 007c 00000091 		add	x0, x0, :lo12:.LC5
+  74 0080 00000094 		bl	printf
+  75 0084 E0E30091 		add	x0, sp, 56
+AARCH64 GAS  struct.s 			page 3
+
+
+  76 0088 00100091 		add	x0, x0, 4
+  77 008c E10300AA 		mov	x1, x0
+  78 0090 00000090 		adrp	x0, .LC2
+  79 0094 00000091 		add	x0, x0, :lo12:.LC2
+  80 0098 00000094 		bl	__isoc99_scanf
+  81 009c 00000090 		adrp	x0, .LC6
+  82 00a0 00000091 		add	x0, x0, :lo12:.LC6
+  83 00a4 00000094 		bl	printf
+  84 00a8 E0C30091 		add	x0, sp, 48
+  85 00ac E10300AA 		mov	x1, x0
+  86 00b0 00000090 		adrp	x0, .LC2
+  87 00b4 00000091 		add	x0, x0, :lo12:.LC2
+  88 00b8 00000094 		bl	__isoc99_scanf
+  89 00bc 00000090 		adrp	x0, .LC7
+  90 00c0 00000091 		add	x0, x0, :lo12:.LC7
+  91 00c4 00000094 		bl	printf
+  92 00c8 E0C30091 		add	x0, sp, 48
+  93 00cc 00100091 		add	x0, x0, 4
+  94 00d0 E10300AA 		mov	x1, x0
+  95 00d4 00000090 		adrp	x0, .LC2
+  96 00d8 00000091 		add	x0, x0, :lo12:.LC2
+  97 00dc 00000094 		bl	__isoc99_scanf
+  98 00e0 E02340F9 		ldr	x0, [sp, 64]
+  99 00e4 E00F00F9 		str	x0, [sp, 24]
+ 100 00e8 E01F40F9 		ldr	x0, [sp, 56]
+ 101 00ec E01300F9 		str	x0, [sp, 32]
+ 102 00f0 E01B40F9 		ldr	x0, [sp, 48]
+ 103 00f4 E01700F9 		str	x0, [sp, 40]
+ 104 00f8 E0630091 		add	x0, sp, 24
+ 105 00fc 00000094 		bl	area
+ 106 0100 E04F00BD 		str	s0, [sp, 76]
+ 107 0104 E04F40BD 		ldr	s0, [sp, 76]
+ 108 0108 00C0221E 		fcvt	d0, s0
+ 109 010c 00000090 		adrp	x0, .LC8
+ 110 0110 00000091 		add	x0, x0, :lo12:.LC8
+ 111 0114 00000094 		bl	printf
+ 112 0118 00008052 		mov	w0, 0
+ 113 011c FD7BC5A8 		ldp	x29, x30, [sp], 80
+ 114              		.cfi_restore 30
+ 115              		.cfi_restore 29
+ 116              		.cfi_def_cfa_offset 0
+ 117 0120 C0035FD6 		ret
+ 118              		.cfi_endproc
+ 119              	.LFE0:
+ 120              		.size	main, .-main
+ 121              		.align	2
+ 122              		.global	func_dis
+ 123              		.type	func_dis, %function
+ 124              	func_dis:
+ 125              	.LFB1:
+ 126              		.cfi_startproc
+ 127 0124 FD7BBDA9 		stp	x29, x30, [sp, -48]!
+ 128              		.cfi_def_cfa_offset 48
+ 129              		.cfi_offset 29, -48
+ 130              		.cfi_offset 30, -40
+ 131 0128 FD030091 		mov	x29, sp
+ 132 012c E00F00F9 		str	x0, [sp, 24]
+AARCH64 GAS  struct.s 			page 4
+
+
+ 133 0130 E10B00F9 		str	x1, [sp, 16]
+ 134 0134 E00F40F9 		ldr	x0, [sp, 24]
+ 135 0138 010040BD 		ldr	s1, [x0]
+ 136 013c E00B40F9 		ldr	x0, [sp, 16]
+ 137 0140 000040BD 		ldr	s0, [x0]
+ 138 0144 2038201E 		fsub	s0, s1, s0
+ 139 0148 00C0221E 		fcvt	d0, s0
+ 140 014c 0110601E 		fmov	d1, 2.0e+0
+ 141 0150 00000094 		bl	pow
+ 142 0154 0040621E 		fcvt	s0, d0
+ 143 0158 E02F00BD 		str	s0, [sp, 44]
+ 144 015c E00F40F9 		ldr	x0, [sp, 24]
+ 145 0160 010440BD 		ldr	s1, [x0, 4]
+ 146 0164 E00B40F9 		ldr	x0, [sp, 16]
+ 147 0168 000440BD 		ldr	s0, [x0, 4]
+ 148 016c 2038201E 		fsub	s0, s1, s0
+ 149 0170 00C0221E 		fcvt	d0, s0
+ 150 0174 0110601E 		fmov	d1, 2.0e+0
+ 151 0178 00000094 		bl	pow
+ 152 017c 0040621E 		fcvt	s0, d0
+ 153 0180 E02B00BD 		str	s0, [sp, 40]
+ 154 0184 E12F40BD 		ldr	s1, [sp, 44]
+ 155 0188 E02B40BD 		ldr	s0, [sp, 40]
+ 156 018c 2028201E 		fadd	s0, s1, s0
+ 157 0190 00C0221E 		fcvt	d0, s0
+ 158 0194 00000094 		bl	sqrt
+ 159 0198 0040621E 		fcvt	s0, d0
+ 160 019c E02700BD 		str	s0, [sp, 36]
+ 161 01a0 E02740B9 		ldr	w0, [sp, 36]
+ 162 01a4 0000271E 		fmov	s0, w0
+ 163 01a8 FD7BC3A8 		ldp	x29, x30, [sp], 48
+ 164              		.cfi_restore 30
+ 165              		.cfi_restore 29
+ 166              		.cfi_def_cfa_offset 0
+ 167 01ac C0035FD6 		ret
+ 168              		.cfi_endproc
+ 169              	.LFE1:
+ 170              		.size	func_dis, .-func_dis
+ 171              		.align	2
+ 172              		.global	area
+ 173              		.type	area, %function
+ 174              	area:
+ 175              	.LFB2:
+ 176              		.cfi_startproc
+ 177 01b0 FD7BBCA9 		stp	x29, x30, [sp, -64]!
+ 178              		.cfi_def_cfa_offset 64
+ 179              		.cfi_offset 29, -64
+ 180              		.cfi_offset 30, -56
+ 181 01b4 FD030091 		mov	x29, sp
+ 182 01b8 E00F00F9 		str	x0, [sp, 24]
+ 183 01bc E20F40F9 		ldr	x2, [sp, 24]
+ 184 01c0 E00F40F9 		ldr	x0, [sp, 24]
+ 185 01c4 00200091 		add	x0, x0, 8
+ 186 01c8 E10300AA 		mov	x1, x0
+ 187 01cc E00302AA 		mov	x0, x2
+ 188 01d0 00000094 		bl	func_dis
+ 189 01d4 E03F00BD 		str	s0, [sp, 60]
+AARCH64 GAS  struct.s 			page 5
+
+
+ 190 01d8 E20F40F9 		ldr	x2, [sp, 24]
+ 191 01dc E00F40F9 		ldr	x0, [sp, 24]
+ 192 01e0 00400091 		add	x0, x0, 16
+ 193 01e4 E10300AA 		mov	x1, x0
+ 194 01e8 E00302AA 		mov	x0, x2
+ 195 01ec 00000094 		bl	func_dis
+ 196 01f0 E03B00BD 		str	s0, [sp, 56]
+ 197 01f4 E00F40F9 		ldr	x0, [sp, 24]
+ 198 01f8 02200091 		add	x2, x0, 8
+ 199 01fc E00F40F9 		ldr	x0, [sp, 24]
+ 200 0200 00400091 		add	x0, x0, 16
+ 201 0204 E10300AA 		mov	x1, x0
+ 202 0208 E00302AA 		mov	x0, x2
+ 203 020c 00000094 		bl	func_dis
+ 204 0210 E03700BD 		str	s0, [sp, 52]
+ 205 0214 E13F40BD 		ldr	s1, [sp, 60]
+ 206 0218 E03B40BD 		ldr	s0, [sp, 56]
+ 207 021c 2128201E 		fadd	s1, s1, s0
+ 208 0220 E03740BD 		ldr	s0, [sp, 52]
+ 209 0224 2128201E 		fadd	s1, s1, s0
+ 210 0228 0010201E 		fmov	s0, 2.0e+0
+ 211 022c 2018201E 		fdiv	s0, s1, s0
+ 212 0230 E03300BD 		str	s0, [sp, 48]
+ 213 0234 E13340BD 		ldr	s1, [sp, 48]
+ 214 0238 E03F40BD 		ldr	s0, [sp, 60]
+ 215 023c 2138201E 		fsub	s1, s1, s0
+ 216 0240 E03340BD 		ldr	s0, [sp, 48]
+ 217 0244 2108201E 		fmul	s1, s1, s0
+ 218 0248 E23340BD 		ldr	s2, [sp, 48]
+ 219 024c E03B40BD 		ldr	s0, [sp, 56]
+ 220 0250 4038201E 		fsub	s0, s2, s0
+ 221 0254 2108201E 		fmul	s1, s1, s0
+ 222 0258 E23340BD 		ldr	s2, [sp, 48]
+ 223 025c E03740BD 		ldr	s0, [sp, 52]
+ 224 0260 4038201E 		fsub	s0, s2, s0
+ 225 0264 2008201E 		fmul	s0, s1, s0
+ 226 0268 00C0221E 		fcvt	d0, s0
+ 227 026c 00000094 		bl	sqrt
+ 228 0270 0040621E 		fcvt	s0, d0
+ 229 0274 E02F00BD 		str	s0, [sp, 44]
+ 230 0278 E02F40B9 		ldr	w0, [sp, 44]
+ 231 027c 0000271E 		fmov	s0, w0
+ 232 0280 FD7BC4A8 		ldp	x29, x30, [sp], 64
+ 233              		.cfi_restore 30
+ 234              		.cfi_restore 29
+ 235              		.cfi_def_cfa_offset 0
+ 236 0284 C0035FD6 		ret
+ 237              		.cfi_endproc
+ 238              	.LFE2:
+ 239              		.size	area, .-area
+ 240              		.ident	"GCC: (Debian 8.3.0-6) 8.3.0"
+ 241              		.section	.note.GNU-stack,"",@progbits
+AARCH64 GAS  struct.s 			page 6
+
+
+DEFINED SYMBOLS
+                            *ABS*:0000000000000000 struct.c
+            struct.s:5      .rodata:0000000000000000 $d
+            struct.s:33     .text:0000000000000000 $x
+            struct.s:36     .text:0000000000000000 main
+            struct.s:174    .text:00000000000001b0 area
+            struct.s:124    .text:0000000000000124 func_dis
+                        .eh_frame:0000000000000014 $d
+
+UNDEFINED SYMBOLS
+puts
+printf
+__isoc99_scanf
+pow
+sqrt

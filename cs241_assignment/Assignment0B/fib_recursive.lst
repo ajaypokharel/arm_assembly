@@ -1,0 +1,72 @@
+AARCH64 GAS  fib_recursive.asm 			page 1
+
+
+   1              	.data
+   2              	
+   3 0000 54686520 	str: .asciz "The value of Fibonacci number %i is %i\n"
+   3      76616C75 
+   3      65206F66 
+   3      20466962 
+   3      6F6E6163 
+   4              	
+   5              	.text
+   6              	
+   7              	.global main
+   8              	
+   9              	main:
+  10 0000 FD7BBFA9 		stp x29, x30, [sp, #-16]!
+  11 0004 000180D2 		mov x0, #8
+  12 0008 060180D2 		mov x6, #8
+  13 000c 08000094 		bl fib
+  14              		
+  15 0010 E20300AA 		mov x2, x0
+  16 0014 E10306AA 		mov x1, x6
+  17 0018 00030058 		ldr x0, =str
+  18 001c 00000094 		bl printf	
+  19              	
+  20 0020 FD7BC1A8 		ldp x29, x30, [sp], #16
+  21 0024 00008052 		mov w0, #0
+  22 0028 C0035FD6 		ret
+  23              	
+  24              	fib:
+  25 002c FD7BBFA9 		stp x29, x30, [sp, #-16]!
+  26 0030 410080D2 		mov x1, #2
+  27 0034 1F0001EB 		cmp x0, x1
+  28 0038 6C000054 		b.gt recursive_case
+  29 003c 200080D2 		mov x0, #1
+  30 0040 0C000014 		b end
+  31              	
+  32              		recursive_case:
+  33 0044 E00F1FF8 			str x0, [sp, #-16]!
+  34 0048 000400D1 			sub x0, x0, #1
+  35 004c F8FFFF97 			bl fib
+  36 0050 E00F1FF8 			str x0, [sp, #-16]!
+  37              	
+  38 0054 E00B40F9 			ldr x0, [sp, #16]
+  39 0058 000800D1 			sub x0, x0, #2
+  40 005c F4FFFF97 			bl fib
+  41              			
+  42 0060 E10741F8 			ldr x1, [sp], #16
+  43 0064 FF430091 			add sp, sp, #16
+  44 0068 0000018B 			add x0, x0, x1
+  45 006c 01000014 			b end
+  46              	
+  47              		end:
+  48 0070 FD7BC1A8 			ldp x29, x30, [sp], #16
+  49 0074 C0035FD6 			ret
+  50 0078 00000000 			 
+  50      00000000 
+AARCH64 GAS  fib_recursive.asm 			page 2
+
+
+DEFINED SYMBOLS
+   fib_recursive.asm:3      .data:0000000000000000 str
+   fib_recursive.asm:9      .text:0000000000000000 main
+   fib_recursive.asm:10     .text:0000000000000000 $x
+   fib_recursive.asm:24     .text:000000000000002c fib
+   fib_recursive.asm:32     .text:0000000000000044 recursive_case
+   fib_recursive.asm:47     .text:0000000000000070 end
+   fib_recursive.asm:50     .text:0000000000000078 $d
+
+UNDEFINED SYMBOLS
+printf
