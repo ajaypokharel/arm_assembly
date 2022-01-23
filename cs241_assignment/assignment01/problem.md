@@ -1,7 +1,7 @@
 Write a program in C that computes the nth Fibonacci number in two ways:
 
-Recursively
-Iteratively
+**Recursively**
+**Iteratively**
 
 You can hard-code the value for what n is...test it with something like 4-10 and check against the list of Fibonacci numbers here: https://oeis.org/A000045 (Links to an external site.).  Thursday I'll show you how to do console input from a user and we'll incorporate that into future assignments (it's not hard: uses a function called scanf).
 
